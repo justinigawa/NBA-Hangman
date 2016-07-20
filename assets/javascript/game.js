@@ -1,3 +1,4 @@
+//creates variables
 var can_play = true;
 var words = new Array("LAKERS", "CLIPPERS", "WARRIORS", "SPURS", "HEAT", "CAVALIERS", "BULLS", "TIMBERWOLVES", "KNICKS", "KNICKS");
  
@@ -44,8 +45,8 @@ document.game.displayWord.value = display_word;
  
 if (display_word.indexOf("-") == -1)
 {
-// won
-alert("Well done, you have won!");
+// if user wins
+alert("Congrats you won! Press new game to play again.");
 can_play = false;
 }
 }
@@ -57,13 +58,14 @@ eval("document.hm.src=\"hm" + wrong_guesses + ".gif\"");
  
 if (wrong_guesses == 10)
 {
-// lost
+// if user losses
 alert("Sorry, you have lost!");
 can_play = false;
 }
 }
 }
- 
+
+//resets game 
 function reset()
 {
 selectWord();
