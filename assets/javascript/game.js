@@ -9,93 +9,94 @@ var wrong_guesses = 0;
  
 function selectLetter(l)
 {
-if (can_play == false)
-{
-return;
-}
+  if (can_play == false)
+  {
+    return;
+  }
  
-if (used_letters.indexOf(l) != -1)
-{
-return;
-}
+  if (used_letters.indexOf(l) != -1)
+  {
+    return;
+  }
  
-used_letters += l;
-document.game.usedLetters.value = used_letters;
+  used_letters += l;
+  document.game.usedLetters.value = used_letters;
  
-if (to_guess.indexOf(l) != -1)
-{
- // correct letter guess
-pos = 0;
-temp_mask = display_word;
+  if (to_guess.indexOf(l) != -1)
+  {
+   // correct letter guess
+  pos = 0;
+  temp_mask = display_word;
  
-while (to_guess.indexOf(l, pos) != -1)
-{
-pos = to_guess.indexOf(l, pos);     
-end = pos + 1;
+  while (to_guess.indexOf(l, pos) != -1)
+  {
+    pos = to_guess.indexOf(l, pos);     
+    end = pos + 1;
+   
+    start_text = temp_mask.substring(0, pos);
+    end_text = temp_mask.substring(end, temp_mask.length);
  
-start_text = temp_mask.substring(0, pos);
-end_text = temp_mask.substring(end, temp_mask.length);
- 
-temp_mask = start_text + l + end_text;
-pos = end;
-}
+    temp_mask = start_text + l + end_text;
+    pos = end;
+  }
  
 display_word = temp_mask;
 document.game.displayWord.value = display_word;
  
 if (display_word.indexOf("-") == -1)
-{
-// if user wins
-alert("Congrats you won! Press new game to play again.");
-can_play = false;
-}
+  {
+  // if user wins
+  alert("Congrats you won! Press new game to play again.");
+  can_play = false;
+  }
 }
 else
 {
-// incortect letter guess
-wrong_guesses += 1;
-eval("document.hm.src=\"hm" + wrong_guesses + ".gif\"");
+  // incortect letter guess
+  wrong_guesses += 1;
+  eval("document.hm.src=\"hm" + wrong_guesses + ".gif\"");
  
-if (wrong_guesses == 10)
-{
-// if user losses
-alert("Sorry, you have lost!");
-can_play = false;
-}
-}
+  if (wrong_guesses == 10)  
+    {
+    // if user losses
+    alert("Sorry, you have lost!");
+    can_play = false;
+    }
+  }
 }
 
 //resets game 
 function reset()
 {
-selectWord();
-document.game.usedLetters.value = "";
-used_letters = "";
-wrong_guesses = 0;
-document.hm.src="hmstart.gif";
+  selectWord();
+  document.game.usedLetters.value = "";
+  used_letters = "";
+  wrong_guesses = 0;
+  
 }
  
 function selectWord()
 {
-can_play = true;
-random_number = Math.round(Math.random() * (words.length - 1));
-to_guess = words[random_number];
-//document.game.theWord.value = to_guess;
+  can_play = true;
+  random_number = Math.round(Math.random() * (words.length - 1));
+  to_guess = words[random_number];
+  //document.game.theWord.value = to_guess;
  
-// display masked word
-masked_word = createMask(to_guess);
-document.game.displayWord.value = masked_word;
-display_word = masked_word;
+  // display masked word
+  masked_word = createMask(to_guess);
+  document.game.displayWord.value = masked_word;
+  display_word = masked_word;
 }
  
 function createMask(m)
 {
-mask = "";
-word_lenght = m.length;
+  mask = "";
+  word_length = m.length;
  
-for (i = 0; i < word_lenght; i ++)
+for (i = 0; i < word_length; i ++)
 {
-mask += "-";
+  mask += "-";
 }
 return mask;
 }
+
